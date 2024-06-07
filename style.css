@@ -1,0 +1,50 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#container {
+  box-sizing: content-box;
+  width: min(100% - 15px, 800px);
+  height: auto;
+  margin-inline: auto;
+  margin-block: 100px;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.block {
+  border: 1px dotted lightgray;
+}
