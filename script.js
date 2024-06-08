@@ -4,17 +4,11 @@ const resetGridButton = document.querySelector("#reset-grid");
 const blackPen = document.querySelector("#black-pen");
 const rainbowPen = document.querySelector("#rainbow-pen");
 const eraser = document.querySelector("#eraser");
+const colorPicker = document.querySelector("#color-picker");
 let promptValue = 16;
 let penColor = "black";
-
-function randomColor() {
-  let letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
+colorPicker.value = "black";
+let mouseDown = false;
 
 function makeGrid() {
   let oneSide = promptValue;
@@ -23,6 +17,7 @@ function makeGrid() {
   for (let i = 0; i < resolution; i++) {
     const block = document.createElement("div");
     block.setAttribute("class", "block");
+    block.setAttribute("draggable", "false");
     block.style.width = containerWidth / oneSide + "px";
     block.style.height = containerWidth / oneSide + "px";
     container.appendChild(block);
@@ -45,7 +40,7 @@ function newSizeGrid() {
 
 function draw(event) {
   let target = event.target;
-  if (event.type === "mouseover" && target.className === "block") {
+  if (target.className === "block" && mouseDown === true) {
     target.style.backgroundColor = penColor;
     target.style.borderColor = penColor;
   }
@@ -61,7 +56,17 @@ function resetGrid() {
 addEventListener("load", makeGrid);
 changeGridSize.addEventListener("click", newSizeGrid);
 resetGridButton.addEventListener("click", resetGrid);
+// container.addEventListener("mouseover", draw);
+
+container.addEventListener("mousedown", (e) => {
+  mouseDown = true;
+  draw(e);
+});
+container.addEventListener("mouseup", () => {
+  mouseDown = false;
+});
 container.addEventListener("mouseover", draw);
+
 blackPen.addEventListener("click", () => {
   container.addEventListener("mouseover", () => {
     penColor = "black";
@@ -79,5 +84,10 @@ rainbowPen.addEventListener("click", () => {
 eraser.addEventListener("click", () => {
   container.addEventListener("mouseover", () => {
     penColor = "";
+  });
+});
+colorPicker.addEventListener("input", () => {
+  container.addEventListener("mouseover", () => {
+    penColor = colorPicker.value;
   });
 });
