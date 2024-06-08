@@ -53,11 +53,13 @@ function resetGrid() {
   });
 }
 
+//Making default grid on page load
 addEventListener("load", makeGrid);
+//Change grid resolution button event
 changeGridSize.addEventListener("click", newSizeGrid);
+//Reset grid button event
 resetGridButton.addEventListener("click", resetGrid);
-// container.addEventListener("mouseover", draw);
-
+//Click and drag drawing method
 container.addEventListener("mousedown", (e) => {
   mouseDown = true;
   draw(e);
@@ -66,12 +68,13 @@ container.addEventListener("mouseup", () => {
   mouseDown = false;
 });
 container.addEventListener("mouseover", draw);
-
+//Black pen button event
 blackPen.addEventListener("click", () => {
   container.addEventListener("mouseover", () => {
     penColor = "black";
   });
 });
+//Raindow pen button event
 rainbowPen.addEventListener("click", () => {
   container.addEventListener("mouseover", () => {
     let letters = "0123456789ABCDEF";
@@ -81,12 +84,14 @@ rainbowPen.addEventListener("click", () => {
     }
   });
 });
+//Eraser button event
 eraser.addEventListener("click", () => {
   container.addEventListener("mouseover", () => {
     penColor = "";
   });
 });
-colorPicker.addEventListener("input", () => {
+//Color picker input event
+colorPicker.addEventListener("click", () => {
   container.addEventListener("mouseover", () => {
     penColor = colorPicker.value;
   });
